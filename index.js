@@ -35,6 +35,7 @@ program
     .option('-n, --new <new>', 'Add new (project, class, view, component)', /^(project|class|view|component)$/i, "none")
     .option('-c, --compile <compile>', 'Compile type (source, dist, all, styles, svg)', /^(source|dist|style|svg|all)$/i, "none")
     .option('-p, --publish', 'Publish your files as defined by publish.json in project root')
+    .option('-cl, --clear', 'Delete all developer folders that are geneated during build and test processes, add "--force" to force delete of locked folders')
     .parse(process.argv);
 
 if (program.new !== "none") {
@@ -55,7 +56,7 @@ if (hasArgument('-p') || hasArgument("--publish")) {
 
 if (hasArgument('-cl') || hasArgument("--clear")) {
     const force = hasArgument('--force');
-    file.deleteFolders(["app"], force);
+    file.deleteFolders(["app", ".nyc_output", "coverage", "dist", "publish"], force);
 }
 
 function hasArgument(argument) {
