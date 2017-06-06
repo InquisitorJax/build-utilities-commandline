@@ -14,7 +14,7 @@ function compileDist() {
     const commonPromise = transpileFiles("src/**/*.js", "commonjs", "dist/commonjs");
     const systemPromise = transpileFiles("src/**/*.js", "systemjs", "dist/systemjs");
 
-    return Promise.all([amdPromise, commonPromise, systemPromise]);
+    return Promise.all([amdPromise, commonPromise, systemPromise]).catch(errors => console.log(errors));
 }
 
 function transpileFiles(query, modules, targetFolder) {

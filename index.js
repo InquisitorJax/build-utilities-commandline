@@ -51,7 +51,7 @@ if (program.test !== "none") {
 }
 
 if (hasArgument('-p') || hasArgument("--publish")) {
-    run('publish');
+    source.compileDist().then(_ => run('publish'));
 }
 
 if (hasArgument('-cl') || hasArgument("--clear")) {
