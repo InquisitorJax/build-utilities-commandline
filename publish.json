@@ -1,0 +1,12 @@
+{
+  "source": [
+    {
+      "source": "dist/amd/**/*.*",
+      "target": "publish"
+    },
+    {
+      "source": "dist/commonjs/**/*.*",
+      "target": "publish"
+    }
+  ]
+}
