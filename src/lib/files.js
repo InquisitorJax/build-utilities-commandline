@@ -20,11 +20,23 @@ function getFiles(query) {
     });
 }
 
-function saveFile(file, content) {
+function saveFile(file, content, async) {
     mkdirp.sync(path.dirname(file));
-    fs.writeFileSync(file, content, {encoding: 'utf8'});
 
-    console.log(`file saved: ${file}`);
+    if (async) {
+        fs.writeFile(file, content, 'utf8', errors => {
+            if (errors) {
+                console.error(errors);
+            }
+
+            console.log(`file saved: ${file}`);
+        })
+    }
+    else {
+        fs.writeFileSync(file, content, {encoding: 'utf8'});
+        console.log(`file saved: ${file}`);
+    }
+
 }
 
 function loadFile(file) {
@@ -32,9 +44,18 @@ function loadFile(file) {
     return fs.readFileSync(fileToLoad, {encoding: 'utf8'});
 }
 
-function copyFile(file, target) {
+function copyFiles(query, target, async) {
+    getFiles(query).then(result => {
+        for(let file of result) {
+            const targetFile = `${target}/${file}`;
+            copyFile(file, targetFile, async);
+        }
+    }).catch(errors => console.log(errors));
+}
+
+function copyFile(file, target, async) {
     const content = loadFile(file);
-    saveFile(target, content);
+    saveFile(target, content, async);
 }
 
 function deleteFolders(folders, force) {
@@ -62,6 +83,7 @@ module.exports = {
     getFiles: getFiles,
     saveFile: saveFile,
     loadFile: loadFile,
+    copyFiles: copyFiles,
     copyFile: copyFile,
     deleteFolder: deleteFolder,
     deleteFolders: deleteFolders
