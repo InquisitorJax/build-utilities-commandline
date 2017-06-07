@@ -1,7 +1,12 @@
 import {expect, assert} from 'chai';
 import * as sinon from 'sinon';
 import 'aurelia-polyfills';
-import {__classname__} from './../../../../app/src/views/__view-tag__/__view-tag__';
+import {EventAggregatorMock} from './../../mockups/event-aggrigator-mock';
+import {__classname__} from './../../../src/views/__view-tag__/__view-tag__';
+
+class EventAggregatorMock {
+
+}
 
 describe('__classname__ Tests', function() {
     let instance;

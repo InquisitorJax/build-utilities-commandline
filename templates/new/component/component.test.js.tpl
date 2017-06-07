@@ -1,7 +1,7 @@
 import {expect, assert} from 'chai';
 import 'aurelia-polyfills';
-import {ElementMockup} from './../../../../node_modules/build-utilities/mockups/element-mockup';
-import {__classname__} from './../../../../app/src/components/__control-tag__/__control-tag__';
+import {ElementMockup} from './../../mockups/element-mockup';
+import {__classname__} from './../../../src/components/__control-tag__/__control-tag__';
 
 describe('__classname__ Tests', function() {
     let instance;

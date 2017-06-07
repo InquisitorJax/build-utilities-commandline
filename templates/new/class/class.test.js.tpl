@@ -1,5 +1,5 @@
 import {expect, assert} from 'chai';
-import {__classname__} from './../../../app/src/__classpath__/__classfilename__';
+import {__classname__} from './../../src/__classpath__/__classfilename__';
 
 describe('__classname__ Tests', function() {
     let instance;
