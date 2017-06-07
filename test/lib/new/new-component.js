@@ -3,6 +3,8 @@ import * as sinon from 'sinon';
 import {getComponentTemplate, getComponentHTMLTemplate, getComponentTestTemplate, createNewComponent} from './../../../src/lib/new/new-component';
 import {prompt} from './../../mockups/prompt-mockup';
 
+global.pbucPath = process.cwd();
+
 describe('new-class tests', function() {
     let sandbox;
 

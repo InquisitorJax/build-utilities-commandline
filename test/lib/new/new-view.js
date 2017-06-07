@@ -3,6 +3,8 @@ import * as sinon from 'sinon';
 import {createNewView} from './../../../src/lib/new/new-view';
 import {prompt} from './../../mockups/prompt-mockup';
 
+global.pbucPath = process.cwd();
+
 describe('new-class tests', function() {
     let sandbox;
 

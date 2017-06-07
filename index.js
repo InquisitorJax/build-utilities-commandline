@@ -18,6 +18,15 @@ require.extensions['.tpl'] = function (module, filename) {
     module.exports = fs.readFileSync(filename, 'utf8');
 };
 
+program
+    .version('0.0.1')
+    .option('-n, --new <new>', 'Add new (project, class, view, component)', /^(project|class|view|component)$/i, "none")
+    .option('-c, --compile <compile>', 'Compile type (source, dist, all, styles, svg)', /^(source|dist|style|svg|all)$/i, "none")
+    .option('-p, --publish', 'Publish your files as defined by publish.json in project root')
+    .option('-cl, --clear', 'Delete all developer folders that are geneated during build and test processes, add "--force" to force delete of locked folders')
+    .parse(process.argv);
+
+
 const actionMap = new Map([
     ["new-class", newCls.createNewClass],
     ["new-component", newComp.createNewComponent],
@@ -33,14 +42,6 @@ const actionParametersMap = new Map([
     ["new-component", [prompt, file.saveFile]],
     ["new-view", [prompt, file.saveFile]]
 ]);
-
-program
-    .version('0.0.1')
-    .option('-n, --new <new>', 'Add new (project, class, view, component)', /^(project|class|view|component)$/i, "none")
-    .option('-c, --compile <compile>', 'Compile type (source, dist, all, styles, svg)', /^(source|dist|style|svg|all)$/i, "none")
-    .option('-p, --publish', 'Publish your files as defined by publish.json in project root')
-    .option('-cl, --clear', 'Delete all developer folders that are geneated during build and test processes, add "--force" to force delete of locked folders')
-    .parse(process.argv);
 
 if (program.new !== "none") {
     run(`new-${program.new}`)
