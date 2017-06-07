@@ -3,6 +3,7 @@ const paths = require("./../project-paths");
 const newHelpers = require("./new-helpers");
 const schema = require("./../schemas");
 const files = require("./../files");
+const path = require("path");
 
 function createNewClass(prompt, saveFile) {
     prompt.start();
@@ -16,14 +17,14 @@ function createNewClass(prompt, saveFile) {
 }
 
 function getClassTemplate(className) {
-    const classTemplate = files.loadFile("templates/new/class/class.js.tpl");
+    const classTemplate = files.loadFile(`${pbucPath}/templates/new/class/class.js.tpl`);
     return populateTemplate(classTemplate, {
         "__classname__": className
     });
 }
 
 function getClassTestTemplate(className, path, classFileName) {
-    const classTestTemplate = files.loadFile("templates/new/class/class.test.js.tpl");
+    const classTestTemplate = files.loadFile(`${pbucPath}/templates/new/class/class.test.js.tpl`);
     return populateTemplate(classTestTemplate, {
         "__classname__": className,
         "__classpath__": path,

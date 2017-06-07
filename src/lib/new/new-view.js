@@ -18,7 +18,7 @@ function createNewView(prompt, saveFile) {
 }
 
 function getViewTemplate(className, tagName) {
-    const classTemplate = files.loadFile("templates/new/views/view.js.tpl");
+    const classTemplate = files.loadFile(`${pbucPath}/templates/new/views/view.js.tpl`);
     return populateTemplate(classTemplate, {
         "__classname__": className,
         "__view-tag__": tagName
@@ -26,11 +26,11 @@ function getViewTemplate(className, tagName) {
 }
 
 function getViewHTMLTemplate() {
-    return files.loadFile("templates/new/views/view.html.tpl");
+    return files.loadFile(`${pbucPath}/templates/new/views/view.html.tpl`);
 }
 
 function getViewTestTemplate(className, tagName) {
-    const classTemplate = files.loadFile("templates/new/views/view.test.js.tpl");
+    const classTemplate = files.loadFile(`${pbucPath}/templates/new/views/view.test.js.tpl`);
     return populateTemplate(classTemplate, {
         "__classname__": className,
         "__view-tag__": tagName

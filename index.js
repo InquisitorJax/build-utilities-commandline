@@ -9,6 +9,10 @@ const newView = require('./src/lib/new/new-view');
 const prompt = require('prompt');
 const file = require('./src/lib/files');
 const publish = require("./src/lib/publish/publish");
+const path = require("path");
+
+global.pbucPath = path.resolve(__dirname);
+console.log(pbucPath);
 
 require.extensions['.tpl'] = function (module, filename) {
     module.exports = fs.readFileSync(filename, 'utf8');

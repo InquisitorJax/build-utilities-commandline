@@ -18,7 +18,7 @@ function createNewComponent(prompt, saveFile) {
 }
 
 function getComponentTemplate(className, tagName) {
-    const classTemplate = files.loadFile("templates/new/component/component.js.tpl");
+    const classTemplate = files.loadFile(`${pbucPath}/templates/new/component/component.js.tpl`);
     return populateTemplate(classTemplate, {
         "__classname__": className,
         "__control-tag__": tagName
@@ -26,11 +26,11 @@ function getComponentTemplate(className, tagName) {
 }
 
 function getComponentHTMLTemplate() {
-    return files.loadFile("templates/new/component/component.html.tpl");
+    return files.loadFile(`${pbucPath}/templates/new/component/component.html.tpl`);
 }
 
 function getComponentTestTemplate(className, tagName) {
-    const classTemplate = files.loadFile("templates/new/component/component.test.js.tpl");
+    const classTemplate = files.loadFile(`${pbucPath}/templates/new/component/component.test.js.tpl`);
     return populateTemplate(classTemplate, {
         "__classname__": className,
         "__control-tag__": tagName
