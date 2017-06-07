@@ -1,12 +1,11 @@
 module.exports = function(modules) {
     return {
-        sourceMaps: false,
-        moduleIds: false,
+        sourceMaps: true,
         comments: false,
         compact: false,
         code: true,
         presets: [
-            ['latest', { loose: true, modules: modules }]
+            ['es2015', { loose: true, modules: modules }]
         ],
         plugins: [
             "transform-decorators-legacy",

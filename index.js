@@ -22,9 +22,9 @@ require.extensions['.tpl'] = function (module, filename) {
 program
     .version('0.0.1')
     .option('-n, --new <new>', 'Add new. options = (project|class|view|component)', /^(project|class|view|component)$/i, "none")
-    .option('-c, --compile <compile>', 'Compile type. options = (source|dist|style|svg|all)', /^(source|dist|style|svg|all)$/i, "none")
+    .option('-c, --compile <compile>', 'Compile type. options = (source [amd or system or commonjs: default is amd]|dist|style|svg|all)', /^(source|dist|style|svg|all)$/i, "none")
     .option('-p, --publish', 'Publish your files as defined by publish.json in project root')
-    .option('-cl, --clear', 'Delete all developer folders that are geneated during build and test processes, add "--force" to force delete of locked folders')
+    .option('-cl, --clear', 'Delete all developer folders that are geneated during build and test processes, add "force" to force delete of locked folders')
     .option('-a, --add <add>', 'Add items to your project. options = (mockups)', /^(mockups)$/i, "none")
     .parse(process.argv);
 
@@ -51,7 +51,26 @@ if (program.new !== "none") {
 }
 
 if (program.compile !== "none") {
-    run(`compile-${program.compile}`);
+    let module = null;
+
+    if (hasArgument("amd")) {
+        module = "amd";
+    }
+    else if (hasArgument("commonjs")) {
+        module = "commonjs"
+    }
+    else if (hasArgument("systemjs")) {
+        module = "systemjs"
+    }
+
+    const actionKey = `compile-${program.compile}`;
+
+    if (module) {
+        runWithCustomParam(actionKey, module);
+    }
+    else {
+        run(actionKey);
+    }
 }
 
 if (program.test !== "none") {
@@ -67,7 +86,7 @@ if (hasArgument('-p') || hasArgument("--publish")) {
 }
 
 if (hasArgument('-cl') || hasArgument("--clear")) {
-    const force = hasArgument('--force');
+    const force = hasArgument('force');
     file.deleteFolders(["app", ".nyc_output", "coverage", "dist", "publish"], force);
 }
 
@@ -75,7 +94,7 @@ function hasArgument(argument) {
     return process.argv.indexOf(argument) > -1
 }
 
-function run(actionKey) {
+function run(actionKey, args) {
     if (actionMap.has(actionKey)) {
         let parameters = null;
         if (actionParametersMap.has(actionKey)) {
@@ -84,5 +103,12 @@ function run(actionKey) {
 
         const action = actionMap.get(actionKey);
         action.apply(this, parameters);
+    }
+}
+
+function runWithCustomParam(actionKey, parameter) {
+    if (actionMap.has(actionKey)) {
+        const action = actionMap.get(actionKey);
+        action.apply(this, [parameter]);
     }
 }

@@ -5,9 +5,10 @@ const fs = require("fs");
 const files = require("./../files");
 const path = require("path");
 
-function compileSource() {
+function compileSource(module) {
+    const targetModule = module || "amd";
     return files.deleteFolder("app").then(_ => {
-        transpileFiles("src/**/*.js", "amd", "app").catch(errors => console.error(errors));
+        transpileFiles("src/**/*.js", targetModule, "app").catch(errors => console.error(errors));
         files.copyFiles("src/**/*.html", "app", true);
         files.copyFiles("src/**/*.css", "app", true);
         files.copyFiles("src/**/*.svg", "app", true);
