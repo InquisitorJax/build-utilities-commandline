@@ -1,10 +1,14 @@
 const files = require("./../files");
+const path = require("path");
 
 function publish() {
     const publishJson = files.loadFile("publish.json");
     const source = JSON.parse(publishJson).source;
 
-    files.deleteFolder("publish").then(_ => publishSource(source)).catch(error => console.error(error));
+    files.deleteFolder("publish").then(_ => {
+        bumpVersion();
+        publishSource(source);
+    }).catch(error => console.error(error));
 }
 
 function publishSource(source)
@@ -15,6 +19,25 @@ function publishSource(source)
 
         copySourceToTarget(src, trg);
     }
+}
+
+function bumpVersion() {
+    const sourcePackage = `${path.resolve(".")}/package.json`;
+    const targetPackage = `${path.resolve(".")}/publish/package.json`;
+
+    const content = files.loadFile(sourcePackage);
+    const pkg = JSON.parse(content);
+    const version = pkg.version;
+    const isPre = version.indexOf("-pre") > -1;
+    const preConstants = ["", "-pre"];
+
+    const versions = version.split(".");
+    versions[2] = versions[2].replace("-pre", "");
+    versions[2] = Number(versions[2]) + 1;
+    pkg.version = `${versions.join(".")}${preConstants[+ isPre]}`;
+
+    files.saveFile(sourcePackage, JSON.stringify(pkg, null, 4));
+    files.copyFile(sourcePackage, targetPackage);
 }
 
 function copySourceToTarget(source, target) {
