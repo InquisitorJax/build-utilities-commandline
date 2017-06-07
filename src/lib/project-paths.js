@@ -8,7 +8,13 @@ function test(path, file) {
     return `${paths.resolve(".")}/test/${path}/${file}`;
 };
 
+function mockups(file) {
+    return `${paths.resolve(".")}/test/mockups/${file}`;
+};
+
+
 module.exports = {
     source: source,
-    test: test
+    test: test,
+    mockups: mockups
 };

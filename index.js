@@ -10,9 +10,10 @@ const prompt = require('prompt');
 const file = require('./src/lib/files');
 const publish = require("./src/lib/publish/publish");
 const path = require("path");
+const add = require("./src/lib/add");
 
 global.pbucPath = path.resolve(__dirname);
-console.log(pbucPath);
+// console.log(pbucPath);
 
 require.extensions['.tpl'] = function (module, filename) {
     module.exports = fs.readFileSync(filename, 'utf8');
@@ -20,10 +21,11 @@ require.extensions['.tpl'] = function (module, filename) {
 
 program
     .version('0.0.1')
-    .option('-n, --new <new>', 'Add new (project, class, view, component)', /^(project|class|view|component)$/i, "none")
-    .option('-c, --compile <compile>', 'Compile type (source, dist, all, styles, svg)', /^(source|dist|style|svg|all)$/i, "none")
+    .option('-n, --new <new>', 'Add new (project|class|view|component)', /^(project|class|view|component)$/i, "none")
+    .option('-c, --compile <compile>', 'Compile type (source|dist|style|svg|all)', /^(source|dist|style|svg|all)$/i, "none")
     .option('-p, --publish', 'Publish your files as defined by publish.json in project root')
     .option('-cl, --clear', 'Delete all developer folders that are geneated during build and test processes, add "--force" to force delete of locked folders')
+    .option('-a, --add <add>', 'Add items to your project (mockups)', /^(mockups)$/i, "none")
     .parse(process.argv);
 
 
@@ -34,7 +36,8 @@ const actionMap = new Map([
     ["compile-source", source.compileSource],
     ["compile-tests", source.compileTests],
     ["compile-dist", source.compileDist ],
-    ["publish", publish.publish]
+    ["publish", publish.publish],
+    ["add-mockups", add.addMockups]
 ]);
 
 const actionParametersMap = new Map([
@@ -53,6 +56,10 @@ if (program.compile !== "none") {
 
 if (program.test !== "none") {
     run(`test-${program.test}`);
+}
+
+if (program.add !== "none") {
+    run('add-mockups');
 }
 
 if (hasArgument('-p') || hasArgument("--publish")) {
