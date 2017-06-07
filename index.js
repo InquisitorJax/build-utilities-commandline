@@ -21,11 +21,11 @@ require.extensions['.tpl'] = function (module, filename) {
 
 program
     .version('0.0.1')
-    .option('-n, --new <new>', 'Add new (project|class|view|component)', /^(project|class|view|component)$/i, "none")
-    .option('-c, --compile <compile>', 'Compile type (source|dist|style|svg|all)', /^(source|dist|style|svg|all)$/i, "none")
+    .option('-n, --new <new>', 'Add new. options = (project|class|view|component)', /^(project|class|view|component)$/i, "none")
+    .option('-c, --compile <compile>', 'Compile type. options = (source|dist|style|svg|all)', /^(source|dist|style|svg|all)$/i, "none")
     .option('-p, --publish', 'Publish your files as defined by publish.json in project root')
     .option('-cl, --clear', 'Delete all developer folders that are geneated during build and test processes, add "--force" to force delete of locked folders')
-    .option('-a, --add <add>', 'Add items to your project (mockups)', /^(mockups)$/i, "none")
+    .option('-a, --add <add>', 'Add items to your project. options = (mockups)', /^(mockups)$/i, "none")
     .parse(process.argv);
 
 

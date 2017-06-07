@@ -7,7 +7,7 @@ module.exports = function(modules) {
         comments: false,
         compact: false,
         code: true,
-        presets: [['es2015', { loose: true, modules: modules }], 'stage-3']
+        presets: [['latest', { loose: true, modules: modules }]]
     };
 };
 

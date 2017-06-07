@@ -13,8 +13,8 @@
       "target": "publish/commonjs"
     },
     {
-      "source": "test/mockups/**/*.*",
-      "target": "publish/commonjs/mockups"
+      "source": "mockups/**/*.*",
+      "target": "publish/commonjs"
     }
   ]
 }
