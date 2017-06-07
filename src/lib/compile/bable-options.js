@@ -1,13 +1,17 @@
-const babelPluginIstanbul = require('babel-plugin-istanbul');
-
 module.exports = function(modules) {
     return {
-        sourceMap: true,
+        sourceMaps: false,
         moduleIds: false,
         comments: false,
         compact: false,
         code: true,
-        presets: [['latest', { loose: true, modules: modules }]]
+        presets: [
+            ['latest', { loose: true, modules: modules }]
+        ],
+        plugins: [
+            "transform-decorators-legacy",
+            "transform-class-properties"
+        ]
     };
 };
 

@@ -6,7 +6,7 @@ const files = require("./../files");
 const path = require("path");
 
 function compileSource() {
-    return transpileFiles("src/**/*.js", "amd", "app");
+    return transpileFiles("src/**/*.js", "amd", "app").catch(errors => console.error(errors));
 }
 
 function compileDist() {
