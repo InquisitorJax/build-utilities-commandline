@@ -15,24 +15,23 @@ function compileSource() {
 }
 
 function compileDist() {
+    const promises = [];
     return files.deleteFolder("dist").then(_ => {
-        const amdPromise = transpileFiles("src/**/*.js", "amd", "dist/amd");
+        promises.push(transpileFiles("src/**/*.js", "amd", "dist/amd"));
         files.copyFiles("src/**/*.html", "dist/amd", true);
         files.copyFiles("src/**/*.css", "dist/amd", true);
         files.copyFiles("src/**/*.svg", "dist/amd", true);
 
-        const commonPromise = transpileFiles("src/**/*.js", "commonjs", "dist/commonjs");
+        promises.push(transpileFiles("src/**/*.js", "commonjs", "dist/commonjs"));
         files.copyFiles("src/**/*.html", "dist/commonjs", true);
         files.copyFiles("src/**/*.css", "dist/commonjs", true);
         files.copyFiles("src/**/*.svg", "dist/commonjs", true);
 
-        const systemPromise = transpileFiles("src/**/*.js", "systemjs", "dist/systemjs");
+        promises.push(transpileFiles("src/**/*.js", "systemjs", "dist/systemjs"));
         files.copyFiles("src/**/*.html", "dist/systemjs", true);
         files.copyFiles("src/**/*.css", "dist/systemjs", true);
         files.copyFiles("src/**/*.svg", "dist/systemjs", true);
-
-        Promise.all([amdPromise, commonPromise, systemPromise]).catch(errors => console.log(errors));
-    })
+    }).then(_ => Promise.all(promises).catch(errors => console.log(errors)))
 }
 
 function transpileFiles(query, modules, targetFolder) {
