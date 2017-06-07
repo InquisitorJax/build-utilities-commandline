@@ -9,6 +9,8 @@ const newView = require('./src/lib/new/new-view');
 const prompt = require('prompt');
 const file = require('./src/lib/files');
 const publish = require("./src/lib/publish/publish");
+const npmBump = require('npm-bump');
+const path = require('path');
 
 require.extensions['.tpl'] = function (module, filename) {
     module.exports = fs.readFileSync(filename, 'utf8');
@@ -52,6 +54,11 @@ if (program.test !== "none") {
 
 if (hasArgument('-p') || hasArgument("--publish")) {
     source.compileDist().then(_ => run('publish'));
+    npmBump("patch");
+
+    const packageSource = `${path.resolve(".")}/package.json`;
+    const packageTarget = `${path.resolve(".")}/publish/package.json`;
+    file.copyFile(packageSource, packageTarget);
 }
 
 if (hasArgument('-cl') || hasArgument("--clear")) {

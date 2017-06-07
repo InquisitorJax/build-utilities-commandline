@@ -25,12 +25,17 @@ function saveFile(file, content) {
     fs.writeFileSync(file, content, {encoding: 'utf8'});
 
     console.log(`file saved: ${file}`);
-};
+}
 
 function loadFile(file) {
     const fileToLoad = path.resolve(".", file);
     return fs.readFileSync(fileToLoad, {encoding: 'utf8'});
-};
+}
+
+function copyFile(file, target) {
+    const content = loadFile(file);
+    saveFile(target, content);
+}
 
 function deleteFolders(folders, force) {
     const promises = [];
@@ -57,6 +62,7 @@ module.exports = {
     getFiles: getFiles,
     saveFile: saveFile,
     loadFile: loadFile,
+    copyFile: copyFile,
     deleteFolder: deleteFolder,
     deleteFolders: deleteFolders
 };

@@ -21,6 +21,7 @@
     "istanbul": "^0.4.5",
     "mkdirp": "^0.5.1",
     "mocha": "^3.4.2",
+    "npm-bump": "0.0.20",
     "nyc": "^10.3.2",
     "prompt": "^1.0.0",
     "proxyquire": "^1.8.0",
