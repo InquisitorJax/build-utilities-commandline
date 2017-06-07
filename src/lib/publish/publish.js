@@ -43,7 +43,8 @@ function bumpVersion() {
 function copySourceToTarget(source, target) {
     return files.getFiles(source).then(resultFiles => {
         for(let file of resultFiles) {
-            const targetFile = `${target}/${file.split("dist/")[1]}`;
+            const fileName = file.indexOf("dist") > -1 ? file.split("dist/")[1] : file;
+            const targetFile = `${target}/${fileName}`;
             const content = files.loadFile(file);
             files.saveFile(targetFile, content);
         }
