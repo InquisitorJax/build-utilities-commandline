@@ -11,6 +11,10 @@
     {
       "source": "templates/**/*.*",
       "target": "publish/commonjs"
+    },
+    {
+      "source": "test/mockups/**/*.*",
+      "target": "publish/commonjs/mockups"
     }
   ]
 }
