@@ -11,6 +11,7 @@ const file = require('./src/lib/files');
 const publish = require("./src/lib/publish/publish");
 const path = require("path");
 const add = require("./src/lib/add");
+const scss = require("./src/lib/compile/scss");
 
 global.pbucPath = path.resolve(__dirname);
 // console.log(pbucPath);
@@ -36,6 +37,7 @@ const actionMap = new Map([
     ["compile-source", source.compileSource],
     ["compile-tests", source.compileTests],
     ["compile-dist", source.compileDist ],
+    ["compile-style", scss.compileScss],
     ["publish", publish.publish],
     ["add-mockups", add.addMockups]
 ]);
