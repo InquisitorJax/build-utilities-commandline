@@ -3,10 +3,9 @@ const files = require("./../files");
 const path = require("path");
 
 function compileScss() {
-console.log("scss");
     files.getFiles("scss/*.scss").then(result => {
         for(let file of result) {
-            const outputfile = `${path.resolve(".")}/styles/${path.basename(file).split(".")[0]}.css`;
+            const outputFile = `styles/${path.basename(file).split(".")[0]}.css`;
 
             scss.render({
                 file: file,
@@ -19,7 +18,7 @@ console.log("scss");
                     console.log(error.line);
                 }
 
-                files.saveFile(outputfile, result.css, true);
+                files.saveFile(outputFile, result.css, true);
             });
         }
     }).catch(errors => console.error(errors));

@@ -38,6 +38,7 @@ const actionMap = new Map([
     ["compile-tests", source.compileTests],
     ["compile-dist", source.compileDist ],
     ["compile-style", scss.compileScss],
+    ["compile-all", compileAll],
     ["publish", publish.publish],
     ["add-mockups", add.addMockups]
 ]);
@@ -89,7 +90,12 @@ if (hasArgument('-p') || hasArgument("--publish")) {
 
 if (hasArgument('-cl') || hasArgument("--clear")) {
     const force = hasArgument('force');
-    file.deleteFolders(["app", ".nyc_output", "coverage", "dist", "publish"], force);
+    file.deleteFolders(["app", ".nyc_output", "coverage", "dist", "publish", "styles"], force);
+}
+
+function compileAll() {
+    source.compileSource();
+    scss.compileScss();
 }
 
 function hasArgument(argument) {
