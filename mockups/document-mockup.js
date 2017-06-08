@@ -4,6 +4,7 @@ class DocumentMockup extends ElementMockup {
     createElement(type) {
         const element = new ElementMockup();
         element.nodeType = type;
+        this.body = new ElementMockup();
         return element;
     }
 
