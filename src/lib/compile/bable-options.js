@@ -1,6 +1,6 @@
 module.exports = function(modules) {
     return {
-        sourceMaps: true,
+        sourceMaps: "inline",
         comments: false,
         compact: false,
         code: true,
