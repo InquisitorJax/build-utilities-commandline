@@ -1,19 +1,19 @@
 const paths = require("path");
 
 function project() {
-    return paths.resolve(".");
+    return projectPath;
 }
 
 function source(path, file) {
-    return `${paths.resolve(".")}/src/${path}/${file}`;
+    return `${projectPath}/src/${path}/${file}`;
 };
 
 function test(path, file) {
-    return `${paths.resolve(".")}/test/${path}/${file}`;
+    return `${projectPath}/test/${path}/${file}`;
 };
 
 function mockups(file) {
-    return `${paths.resolve(".")}/test/mockups/${file}`;
+    return `${projectPath}/test/mockups/${file}`;
 };
 
 

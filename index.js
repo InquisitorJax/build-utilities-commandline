@@ -15,7 +15,7 @@ const add = require("./src/lib/add");
 const scss = require("./src/lib/compile/scss");
 
 global.pbucPath = path.resolve(__dirname);
-// console.log(pbucPath);
+global.projectPath = path.resolve(process.cwd());
 
 require.extensions['.tpl'] = function (module, filename) {
     module.exports = fs.readFileSync(filename, 'utf8');

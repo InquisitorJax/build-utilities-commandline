@@ -1,6 +1,6 @@
 {
     "name": "build-utilities-commandline",
-    "version": "1.0.54",
+    "version": "1.0.64",
     "main": "commonjs/index.js",
     "scripts": {
         "build": "node ./index.js -c all",
