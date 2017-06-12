@@ -6,6 +6,7 @@ const fs = require('fs');
 const newCls = require('./src/lib/new/new-class');
 const newComp = require('./src/lib/new/new-component');
 const newView = require('./src/lib/new/new-view');
+const newProject = require('./src/lib/new/new-project');
 const prompt = require('prompt');
 const file = require('./src/lib/files');
 const publish = require("./src/lib/publish/publish");
@@ -34,6 +35,7 @@ const actionMap = new Map([
     ["new-class", newCls.createNewClass],
     ["new-component", newComp.createNewComponent],
     ["new-view", newView.createNewView],
+    ["new-project", newProject.createStandardProject],
     ["compile-source", source.compileSource],
     ["compile-tests", source.compileTests],
     ["compile-dist", source.compileDist ],
