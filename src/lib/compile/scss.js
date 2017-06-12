@@ -3,9 +3,16 @@ const files = require("./../files");
 const path = require("path");
 
 function compileScss() {
-    files.getFiles("scss/*.scss").then(result => {
+    const promises = [];
+    const scssPromise = files.getFiles("scss/**/*.scss").then(result => {
         for(let file of result) {
-            const outputFile = `styles/${path.basename(file).split(".")[0]}.css`;
+            if (file.indexOf("/lib/") > -1) {
+                continue;
+            }
+
+            let outputFile = file;
+            outputFile = outputFile.replace("scss/", "styles/");
+            outputFile = outputFile.replace(".scss", ".css");
 
             scss.render({
                 file: file,
@@ -21,6 +28,24 @@ function compileScss() {
                 files.saveFile(outputFile, result.css, true);
             });
         }
+    });
+
+    const fontsPromise = copyFonts();
+    promises.push(scssPromise);
+    promises.push(fontsPromise);
+
+    return Promise.all(promises).catch(errors => console.error(errors));
+}
+
+function copyFonts() {
+    return files.getFiles("scss/fonts/**/*.*").then(result => {
+        for(let file of result) {
+            let targetFile = file;
+            targetFile = targetFile.replace("scss/", "styles/");
+
+            files.saveFile(targetFile, files.loadFile(file), true);
+        }
+
     }).catch(errors => console.error(errors));
 }
 
