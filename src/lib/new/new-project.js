@@ -8,7 +8,7 @@ function createStandardProject() {
        for(let file of result) {
            const target = file.replace(`${pbucPath}/templates/app/standard`, projectFolder);
            const content = files.loadFile(file);
-           files.saveFile(file, content, true);
+           files.saveFile(target, content, true);
        }
     });
 }
