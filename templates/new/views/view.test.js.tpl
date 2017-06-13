@@ -4,10 +4,6 @@ import 'aurelia-polyfills';
 import {EventAggregatorMock} from './../../mockups/event-aggrigator-mock';
 import {__classname__} from './../../../src/views/__view-tag__/__view-tag__';
 
-class EventAggregatorMock {
-
-}
-
 describe('__classname__ Tests', function() {
     let instance;
     let eventAggregator;
