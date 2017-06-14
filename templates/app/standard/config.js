@@ -4,9 +4,9 @@ System.config({
     transpiler: false,
     paths: {
         "*": "app/src/*",
-        "github:*": "jspm_packages/github/*",
         "npm:*": "jspm_packages/npm/*"
     },
+
     map: {
         "aurelia-bootstrapper": "npm:aurelia-bootstrapper@2.1.1",
         "aurelia-framework": "npm:aurelia-framework@1.1.2",
