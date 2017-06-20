@@ -24,6 +24,7 @@ When creating a new project, please note the following.
 
 1. Navigate in your terminal to the folder where you want to create the project
 1. All files will be compied relative to the folder you are in
+1. Run `bucli -n project` to create the new project
 1. You need to run `npm install` after the files are copied
 1. You also need to run `jspm install -y`
 1. After this you can compile your project using `bucli -c all` and run it in a webserver
