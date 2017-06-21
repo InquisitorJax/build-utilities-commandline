@@ -41,3 +41,10 @@ Projects created with bucli will have testing and code coverage configured.
 There is a npm script in package.json to run tests and by defaults includes code coverage.
 
 Running the npm script is the same as running any other npm script: `npm run test`.
+
+# UI Testing
+UI testing is done using selenium so you will need the appropriate dirver to use.
+We use chrome as the default configuration meaning that you will need to have the chrome driver in a path on your machine or in the project folder.
+
+You can download the driver at:  
+https://chromedriver.storage.googleapis.com/index.html?path=2.30/
