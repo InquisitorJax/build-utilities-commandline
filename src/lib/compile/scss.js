@@ -1,6 +1,7 @@
 const scss = require("node-sass");
 const files = require("./../files");
 const path = require("path");
+const fs = require("fs");
 
 function compileScss() {
     const promises = [];
@@ -39,12 +40,17 @@ function compileScss() {
 
 function copyFonts() {
     return files.getFiles("scss/fonts/**/*.*").then(result => {
-        for(let file of result) {
-            let targetFile = file;
-            targetFile = targetFile.replace("scss/", "styles/");
+        const testTarget = result[0].slice(0).replace("scss/", "styles/");
 
-            files.saveFile(targetFile, files.loadFile(file), true);
+        if (!fs.existsSync(testTarget)) {
+            for(let file of result) {
+                let targetFile = file;
+                targetFile = targetFile.replace("scss/", "styles/");
+
+                files.saveFile(targetFile, files.loadFile(file), true);
+            }
         }
+
 
     }).catch(errors => console.error(errors));
 }

@@ -5,6 +5,8 @@ const schema = require("./../schemas");
 const files = require("./../files");
 const path = require("path");
 
+global.projectPath = process.cwd();
+
 function createNewClass(prompt, saveFile) {
     prompt.start();
     return prompt.get(schema.component, (error, result) => {
