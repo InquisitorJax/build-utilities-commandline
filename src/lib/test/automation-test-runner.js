@@ -67,6 +67,11 @@ class TestWebDriver {
         this.driver = new this.webdriver.Builder().forBrowser('chrome').build();
         this.WebElement = this.webdriver.WebElement;
         this.action = new this.webdriver.ActionSequence(this.driver);
+        this.Condition = this.webdriver.Condition;
+    }
+
+    hasElement(id) {
+        return this.driver.findElements(By.id(id)).size() != 0;
     }
 }
 
@@ -479,11 +484,13 @@ class Step {
     }
 
     checkHasElement(elementName) {
-        return testWebDriver.driver.isElementPresent(testWebDriver.by.id(elementName)).then(function(hasElement){
-            if (!hasElement) {
-                this.logError(`${elementName} was not found but expected in dom`);
-            }
-        }.bind(this));
+        const hasElement = testWebDriver.hasElement(elementName);
+
+        if (!hasElement) {
+            this.logError(`${elementName} was not found but expected in dom`);
+        }
+
+        return hasElement;
     }
 }
 
@@ -594,7 +601,7 @@ class WaitStep extends Step {
         let elementType = "";
         const locator = this.getTargetLocator(target);
 
-        const condition = new testWebDriver.until.Condition('for element ' + target, function () {
+        const condition = new testWebDriver.Condition('for element ' + target, function () {
             const element = testWebDriver.driver.findElement(locator);
             element.getTagName().then(tagName => {
                 elementType = tagName;
@@ -616,12 +623,8 @@ class WaitStep extends Step {
         let hasElement = false;
         const locator = this.getTargetLocator(target);
 
-        const condition = new testWebDriver.until.Condition('for element to exist in dom ' + target, function() {
-            testWebDriver.driver.isElementPresent(locator).then(function(foundElement){
-                hasElement = foundElement
-            }.bind(this));
-
-            return hasElement;
+        const condition = new testWebDriver.Condition('for element to exist in dom ' + target, function() {
+            return testWebDriver.hasElement(locator);
         });
 
         if (!timeout) {
@@ -646,7 +649,7 @@ class WaitStep extends Step {
         let tagName = "";
         let hasChanged = false;
 
-        const condition = new testWebDriver.until.Condition('for text change on ' + target, function() {
+        const condition = new testWebDriver.Condition('for text change on ' + target, function() {
             if (tagName === "label" || tagName === "div" || tagName === "h1" || tagName === "h2" ) {
                 element.getAttribute('innerHTML').then(attribute => {
                     hasChanged = attribute === text;
@@ -678,7 +681,7 @@ class WaitStep extends Step {
 
         let hasChanged = false;
 
-        const condition = new testWebDriver.until.Condition('for attibute change on' + target, function() {
+        const condition = new testWebDriver.Condition('for attibute change on' + target, function() {
             element.getAttribute(attribute).then(attribute => {
                 hasChanged = attribute === text;
             });

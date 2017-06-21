@@ -8,9 +8,164 @@
       "open": ""
     },
     {
+      "type": {
+        "text": "Hello World",
+        "target": "edtTest"
+      }
+    },
+    {
+      "hasFocus": "edtTest"
+    },
+    {
+      "pressKeys": {
+        "keys": ["return"],
+        "target": "edtTest"
+      }
+    },
+    {
       "wait": {
-        "text": "test",
-        "target": "test"
+        "target": "btnTest",
+        "type": "button"
+      }
+    },
+    {
+      "click": "btnTest"
+    },
+    {
+      "wait": {
+        "text": "button was clicked",
+        "target": "lblWasClicked"
+      }
+    },
+    {
+      "visible": "btnVisibleWithNoAttributes"
+    },
+    {
+      "visible": "btnInvisible"
+    },
+    {
+      "invisible": "btnInvisible"
+    },
+    {
+      "enabled": "btnVisibleWithNoAttributes"
+    },
+    {
+      "enabled": "btnEnabled"
+    },
+    {
+      "disabled": "btnDisabled"
+    },
+    {
+      "required": "edtRequired"
+    },
+    {
+      "required": "edtNotRequired"
+    },
+    {
+      "selected": "divSelected"
+    },
+    {
+      "checked": "chbChecked"
+    },
+    {
+      "readonly": "edtReadOnly"
+    },
+    {
+      "valid": "edtValid"
+    },
+    {
+      "invalid": "edtInvalid"
+    },
+    {
+      "valid": "edtSetText"
+    },
+    {
+      "invalid": "edtInvalid"
+    },
+    {
+      "click": "btnSetText"
+    },
+    {
+      "wait": {
+        "text": "text set",
+        "target": "edtSetText"
+      }
+    },
+    {
+      "clear": "edtSetText"
+    },
+    {
+      "wait": {
+        "text": "text set 2",
+        "target": "edtSetText",
+        "comment": "testing timeout because the text is wrong"
+      }
+    },
+    {
+      "hasElement": "edtSetText"
+    },
+    {
+      "hasElement": "someOddIdThatDOesNotExist"
+    },
+    {
+      "hasAttribute": {
+        "target": "btnLookup",
+        "attribute": "aria-label"
+      }
+    },
+    {
+      "hasAttribute": {
+        "target": "btnLookup",
+        "attribute": "aria-label",
+        "exists": false
+      }
+    },
+    {
+      "hasAttribute": {
+        "target": "btnLookup",
+        "attribute": "aria-label-what",
+        "exists": false
+      }
+    },
+    {
+      "attributeValue": {
+        "target": "btnLookup",
+        "attribute": "aria-label",
+        "text": "lookup"
+      }
+    },
+    {
+      "hasClass": {
+        "target": "btnLookup",
+        "class": "lookup"
+      }
+    },
+    {
+      "cssAttribute": {
+        "target": "btnLookup",
+        "attribute": "background-color",
+        "value": "#FFBB00",
+        "alt": "rgba(255, 187, 0, 1)"
+      }
+    },
+    {
+      "focus": "btnLookup"
+    },
+    {
+      "hasFocus": "btnLookup"
+    },
+    {
+      "wait": {
+        "target": "?[aria-data-locator]"
+      }
+    },
+    {
+      "dblclick": "?[aria-data=\"abc\"]"
+    },
+    {
+      "wait": {
+        "target": "?[aria-data-locator]",
+        "text": "ABC dbl clicked"
       }
     }
   ]

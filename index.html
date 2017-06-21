@@ -1,13 +1,87 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Application Title</title>
+
+    <style>
+        button[aria-hidden="false"] {
+            display: inherit;
+        }
+        button[aria-hidden="true"] {
+            display: none;
+        }
+        button[aria-disabled="true"] {
+            background: silver;
+        }
+        button {
+            width: 200px;
+            height: 24px;
+            display: block;
+        }
+        input[type="text"] {
+            display: block;
+            width: 200px;
+        }
+        #btnLookup {
+            background: #FB0;
+        }
+    </style>
 </head>
 <body>
-    <div id="test">Test</div>
+<div>
+    <label for="edtTest">Test</label>
+    <input type="text" id="edtTest" />
+    <button id="btnTest">Click Me</button>
+    <label id="lblWasClicked"></label>
+
+    <button id="btnVisibleWithNoAttributes">Visible With No Attribute</button>
+    <button id="btnInvisible" aria-hidden="true">Hidden</button>
+    <button id="btnVisible" ria-hidden="false" >Visible</button>
+    <button id="btnEnabledWithNoAttributes">Enabled With No Attribute</button>
+    <button id="btnDisabled" aria-disabled="true" disabled>Disabled</button>
+    <button id="btnEnabled" aria-disabled="false">Not Disabled</button>
+    <input id="edtDisabled" aria-disabled="true" type="text" required value="disabled" disabled/>
+
+    <input id="edtRequired" aria-required="true" type="text" required/>
+    <input id="edtNotRequired" type="text" />
+
+    <div id="divSelected" aria-selected="true"/>
+    <input id="chbChecked" type="checkbox" aria-checked="true" checked/>
+    <input id="edtReadOnly" type="text" aria-readonly="true" readonly value="hello world"></input>
+
+    <button id="btnSetText" >Set Edit Text</button>
+    <input id="edtSetText" type="text" />
+    <input id="edtValid" type="text" aria-invalid="false" />
+    <input id="edtInvalid" type="text" aria-invalid="true" />
+
+    <button id="btnLookup" class="lookup" aria-label="lookup2"></button>
+
+    <ul>
+        <li aria-data="abc" id="liAbc">ABC LI</li>
+    </ul>
+
+    <div aria-data-locator id="liAbcTaret"></div>
+</div>
+<script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js', {scope: '/'})
+            .then(function(reg) {
+                console.log('Registration succeeded. Scope is ' + reg.scope);
+            }).catch(function(error) {
+            console.log('Registration failed with ' + error);
+        });
+    }
+    document.getElementById('btnTest').addEventListener('click', function() {
+        document.getElementById('lblWasClicked').innerHTML = "button was clicked";
+    });
+    document.getElementById('btnSetText').addEventListener('click', function() {
+        document.getElementById('edtSetText').value = "text set";
+    });
+    document.getElementById('liAbc').addEventListener('dblclick', function() {
+        document.getElementById('liAbcTaret').innerHTML = "ABC dbl clicked";
+    })
+</script>
 </body>
 </html>

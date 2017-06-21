@@ -124,11 +124,13 @@ if (hasArgument('-t') || hasArgument("--test")) {
 
         file.getFiles(searchPath).then(result => {
             for (let f of result) {
-                const content = file.loadFile(f);
-                const test = JSON.parse(content);
-                test.test.path = f;
+                if (f[0] != ".") {
+                    const content = file.loadFile(f);
+                    const test = JSON.parse(content);
+                    test.test.path = f;
 
-                jsonTestsToRun.push(test);
+                    jsonTestsToRun.push(test);
+                }
             }
 
             runner.run(jsonTestsToRun, _ => server.exit())
