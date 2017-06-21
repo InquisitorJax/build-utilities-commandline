@@ -40,6 +40,10 @@ function compileScss() {
 
 function copyFonts() {
     return files.getFiles("scss/fonts/**/*.*").then(result => {
+        if (result.length == 0) {
+            return;
+        }
+
         const testTarget = result[0].slice(0).replace("scss/", "styles/");
 
         if (!fs.existsSync(testTarget)) {
