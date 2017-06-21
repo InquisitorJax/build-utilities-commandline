@@ -1,0 +1,17 @@
+{
+  "test": {
+    "description": "test automated testing by accessing google",
+    "author": "Johan Rabie"
+  },
+  "steps": [
+    {
+      "open": ""
+    },
+    {
+      "wait": {
+        "text": "test",
+        "target": "test"
+      }
+    }
+  ]
+}

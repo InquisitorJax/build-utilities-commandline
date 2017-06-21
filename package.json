@@ -5,19 +5,23 @@
     "scripts": {
         "build": "node ./index.js -c all",
         "package": "node ./index.js -p",
-        "test": "nyc mocha --compilers js:babel-core/register --recursive"
+        "test": "nyc mocha --compilers js:babel-core/register --recursive",
+        "testui": "node ./index.js -t"
     },
     "license": "ISC",
     "dependencies": {
         "babel-core": "^6.24.1",
         "babel-preset-es2015": "^6.24.1",
+        "browser-sync": "^2.18.12",
         "commander": "^2.9.0",
         "del": "^2.2.2",
+        "fs-path": "0.0.23",
         "glob": "^7.1.2",
         "mkdirp": "^0.5.1",
         "node-sass": "^4.5.3",
         "prompt": "^1.0.0",
-        "proxyquire": "^1.8.0"
+        "proxyquire": "^1.8.0",
+        "selenium-webdriver": "^3.4.0"
     },
     "devDependencies": {
         "aurelia-event-aggregator": "^1.0.1",

@@ -13,6 +13,9 @@ const publish = require("./src/lib/publish/publish");
 const path = require("path");
 const add = require("./src/lib/add");
 const scss = require("./src/lib/compile/scss");
+const AutomationTestRunner = require("./src/lib/test/automation-test-runner");
+const projectPath = require("./src/lib/project-paths");
+const browserSync = require("browser-sync");
 
 global.pbucPath = path.resolve(__dirname);
 global.projectPath = path.resolve(process.cwd());
@@ -28,6 +31,7 @@ program
     .option('-p, --publish', 'Publish your files as defined by publish.json in project root')
     .option('-cl, --clear', 'Delete all developer folders that are geneated during build and test processes, add "force" to force delete of locked folders')
     .option('-a, --add <add>', 'Add items to your project. options = (mockups)', /^(mockups)$/i, "none")
+    .option('-t, --test', 'Test UI')
     .parse(process.argv);
 
 
@@ -95,9 +99,74 @@ if (hasArgument('-cl') || hasArgument("--clear")) {
     file.deleteFolders(["app", ".nyc_output", "coverage", "dist", "publish", "styles"], force);
 }
 
+if (hasArgument('-t') || hasArgument("--test")) {
+    const url = urlArgument() || "http://localhost:8080";
+    const glob = globArgument() || "**/*.json";
+
+    const searchPath = projectPath.test("e2e", glob);
+
+    const serverOptions = {
+        port: 8080,
+        open: false,
+        server: {
+            baseDir: './'
+        },
+        ui: {
+            port: 8081
+        }
+    };
+
+
+    const jsonTestsToRun = [];
+
+    const server = browserSync.init(serverOptions, _ => {
+        const runner = new AutomationTestRunner(url);
+
+        file.getFiles(searchPath).then(result => {
+            for (let f of result) {
+                const content = file.loadFile(f);
+                const test = JSON.parse(content);
+                test.test.path = f;
+
+                jsonTestsToRun.push(test);
+            }
+
+            runner.run(jsonTestsToRun, _ => server.exit())
+        }).catch(errors => console.error(errors));
+    });
+}
+
 function compileAll() {
     source.compileSource();
     scss.compileScss();
+}
+
+function urlArgument() {
+    for (let arg of process.argv) {
+        if (arg.indexOf("http://") > -1 || arg.indexOf("https://") > -1) {
+            return arg;
+        }
+    }
+
+    return null;
+}
+
+function globArgument() {
+    for (let arg of process.argv) {
+        if (argContains(arg, ".json")) {
+            return arg;
+        }
+
+        if (argContains(arg, "*.")) {
+            return arg;
+        }
+    }
+
+    return null;
+}
+
+function argContains(arg, content) {
+    return arg.indexOf(content) > -1;
 }
 
 function hasArgument(argument) {
