@@ -24,8 +24,21 @@ const namedSchema = {
     }
 };
 
+const projectSchema = {
+    properties: {
+        "project-type": {
+            description: "Project type (web - w, electron - e)",
+            pattern: /^[a-zA-Z]+$/,
+            message: 'Name must be only letters',
+            required: true,
+            default: "web"
+        }
+    }
+};
+
 
 module.exports = {
     component: componentSchema,
-    named: namedSchema
+    named: namedSchema,
+    project: projectSchema
 };

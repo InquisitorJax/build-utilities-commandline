@@ -39,7 +39,7 @@ const actionMap = new Map([
     ["new-class", newCls.createNewClass],
     ["new-component", newComp.createNewComponent],
     ["new-view", newView.createNewView],
-    ["new-project", newProject.createStandardProject],
+    ["new-project", newProject.createProject],
     ["compile-source", source.compileSource],
     ["compile-tests", source.compileTests],
     ["compile-dist", source.compileDist ],

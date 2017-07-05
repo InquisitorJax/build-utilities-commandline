@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#fb0">
+
+    <title>Application Title</title>
+
+    <link rel="stylesheet" href="./styles/style.css" async>
+</head>
+<body aurelia-app="main">
+    <h1>Welcome to my application</h1>
+    <p>
+        please wait while loading content
+    </p>
+
+    <script async>
+        function systemLoaded() {
+            const path = require('path');
+            const appRoot = path.resolve(__dirname);
+            System.config({
+                "baseURL": appRoot
+            });
+        }
+
+        function jspmLoaded() {
+            System.import('aurelia-bootstrapper');
+        }
+    </script>
+
+    <script src="./jspm_packages/system.js" onload="systemLoaded()" defer></script>
+
+    <script src="./config.js" onload="jspmLoaded()" defer></script>
+</body>
+</html>
