@@ -40,13 +40,13 @@ function createNewView(prompt, saveFile) {
 
 function createEmpty(className, tagName, path, saveFile) {
     saveFile(paths.source(path, `${tagName}.js`), getViewTemplate(className, tagName, 'view.js.tpl'));
-    saveFile(paths.source(path, `${tagName}.html`), getViewHTMLTemplate('view.html.tpl'));
+    saveFile(paths.source(path, `${tagName}.html`), getViewHTMLTemplate('view.html.tpl', tagName));
     saveFile(paths.test(path, `${tagName}.js`), getViewTestTemplate(className, tagName));
 }
 
 function createList(className, tagName, path, saveFile) {
     saveFile(paths.source(path, `${tagName}.js`), getViewTemplate(className, tagName, 'list.js.tpl'));
-    saveFile(paths.source(path, `${tagName}.html`), getViewHTMLTemplate('list.html.tpl'));
+    saveFile(paths.source(path, `${tagName}.html`), getViewHTMLTemplate('list.html.tpl', tagName));
     saveFile(paths.test(path, `${tagName}.js`), getViewTestTemplate(className, tagName));
 
     files.copyFile(`${pbucPath}/templates/new/views/toolbar-items.js.tpl`, paths.source(path, 'toolbar-items.js'));
@@ -69,8 +69,11 @@ function getViewTemplate(className, tagName, file) {
     });
 }
 
-function getViewHTMLTemplate(file) {
-    return files.loadFile(`${pbucPath}/templates/new/views/${file}`);
+function getViewHTMLTemplate(file, tagName) {
+    const template = files.loadFile(`${pbucPath}/templates/new/views/${file}`);
+    return populateTemplate(template, {
+        '__view-tag__': tagName
+    })
 }
 
 function getViewTestTemplate(className, tagName) {
