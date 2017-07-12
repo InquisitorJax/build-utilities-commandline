@@ -16,6 +16,10 @@ function test(path, file) {
     return `${projectPath}/test/${path}/${file}`;
 };
 
+function styles(path, file) {
+    return `${projectPath}/scss/${path}/${file}`;
+}
+
 function mockups(file) {
     return `${projectPath}/test/mockups/${file}`;
 };
@@ -26,5 +30,6 @@ module.exports = {
     test: test,
     mockups: mockups,
     project: project,
-    e2eResultsPath: e2eResultsPath
+    e2eResultsPath: e2eResultsPath,
+    styles: styles
 };

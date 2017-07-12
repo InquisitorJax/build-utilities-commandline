@@ -22,10 +22,27 @@ const namedSchema = {
     }
 };
 
+const viewSchema = {
+    properties: {
+        name: {
+            pattern: /^[a-zA-Z]+$/,
+            message: 'Name must be only letters',
+            required: true
+        },
+        "view-type": {
+            description: "Project type (empty or e, list or l, crud or c, master-detail or m)",
+            pattern: /^[a-zA-Z]+$/,
+            message: 'Name must be only letters',
+            required: true,
+            default: "empty"
+        }
+    }
+};
+
 const projectSchema = {
     properties: {
         "project-type": {
-            description: "Project type (web - w, electron - e)",
+            description: "Project type (web or w, electron or e)",
             pattern: /^[a-zA-Z]+$/,
             message: 'Name must be only letters',
             required: true,
@@ -38,5 +55,6 @@ const projectSchema = {
 module.exports = {
     component: componentSchema,
     named: namedSchema,
-    project: projectSchema
+    project: projectSchema,
+    view: viewSchema
 };
