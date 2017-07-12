@@ -20,16 +20,16 @@ function createNewView(prompt, saveFile) {
             const firstItem = type[0].toLowerCase();
 
             if (firstItem === "e") {
-                createEmpty(className, tagName, path);
+                createEmpty(className, tagName, path, saveFile);
             }
             else if (firstItem === "l") {
-                createList(className, tagName, path);
+                createList(className, tagName, path, saveFile);
             }
             else if (firstItem === "c") {
-                createCrud(className, tagName, path);
+                createCrud(className, tagName, path, saveFile);
             }
             else if (firstItem === "m") {
-                createMd(className, tagName, path);
+                createMd(className, tagName, path, saveFile);
             }
         }
         else {
@@ -38,26 +38,26 @@ function createNewView(prompt, saveFile) {
     });
 }
 
-function createEmpty(className, tagName, path) {
+function createEmpty(className, tagName, path, saveFile) {
     saveFile(paths.source(path, `${tagName}.js`), getViewTemplate(className, tagName, 'view.js.tpl'));
     saveFile(paths.source(path, `${tagName}.html`), getViewHTMLTemplate('view.html.tpl'));
     saveFile(paths.test(path, `${tagName}.js`), getViewTestTemplate(className, tagName));
 }
 
-function createList(className, tagName, path) {
+function createList(className, tagName, path, saveFile) {
     saveFile(paths.source(path, `${tagName}.js`), getViewTemplate(className, tagName, 'list.js.tpl'));
     saveFile(paths.source(path, `${tagName}.html`), getViewHTMLTemplate('list.html.tpl'));
     saveFile(paths.test(path, `${tagName}.js`), getViewTestTemplate(className, tagName));
 
-    files.copyFile(paths.source(path, 'toolbar-items.js'), `${pbucPath}/templates/new/views/toolbar-items.js.tpl`);
-    files.copyFile(paths.styles('views', `${tagName}.scss`), `${pbucPath}/templates/new/views/list.scss.tpl`)
+    files.copyFile(`${pbucPath}/templates/new/views/toolbar-items.js.tpl`, paths.source(path, 'toolbar-items.js'));
+    files.copyFile(`${pbucPath}/templates/new/views/list.scss.tpl`, paths.styles('views', `${tagName}.scss`));
 }
 
-function createCrud(className, tagName, path) {
+function createCrud(className, tagName, path, saveFile) {
     return console.log("create Crud");
 }
 
-function createMd(className, tagName, path) {
+function createMd(className, tagName, path, saveFile) {
     return console.log("create Md");
 }
 
