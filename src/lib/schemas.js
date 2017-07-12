@@ -6,8 +6,6 @@ const componentSchema = {
             required: true
         },
         path: {
-            pattern: /^[a-zA-Z]+$/,
-            message: 'Name must be only letters',
             required: true,
             default: "lib"
         }
