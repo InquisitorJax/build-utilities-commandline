@@ -60,7 +60,7 @@ function createCrud(className, tagName, path, saveFile) {
 
     files.copyFile(`${pbucPath}/templates/new/views/toolbar-items.js.tpl`, paths.source(path, 'toolbar-items.js'));
     files.copyFile(`${pbucPath}/templates/new/views/model.js.tpl`, paths.source(path, 'model.js'));
-    files.copyFile(`${pbucPath}/templates/new/views/schemas.js.tpl`, paths.source(path, 'schemas.js'));
+    files.copyFile(`${pbucPath}/templates/new/views/schema.js.tpl`, paths.source(path, 'schema.js'));
 }
 
 function createMd(className, tagName, path, saveFile) {
