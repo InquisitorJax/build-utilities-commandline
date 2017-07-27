@@ -5,7 +5,7 @@ import {Model} from './model';
 import {toolbarItems} from './toolbar-items';
 
 @inject(EventAggregator)
-export class Detail {
+export class __classname__ {
     @bindable toolbarItems;
     @bindable detailToolbarSelectedId;
     @bindable schema;
