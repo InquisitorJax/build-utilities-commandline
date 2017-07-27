@@ -54,7 +54,13 @@ function createList(className, tagName, path, saveFile) {
 }
 
 function createCrud(className, tagName, path, saveFile) {
-    return console.log("create Crud");
+    saveFile(paths.source(path, `${tagName}.js`), getViewTemplate(className, tagName, 'detail.js.tpl'));
+    saveFile(paths.source(path, `${tagName}.html`), getViewHTMLTemplate('detail.html.tpl', tagName));
+    saveFile(paths.test(path, `${tagName}.js`), getViewTestTemplate(className, tagName));
+
+    files.copyFile(`${pbucPath}/templates/new/views/toolbar-items.js.tpl`, paths.source(path, 'toolbar-items.js'));
+    files.copyFile(`${pbucPath}/templates/new/views/model.js.tpl`, paths.source(path, 'model.js'));
+    files.copyFile(`${pbucPath}/templates/new/views/schemas.js.tpl`, paths.source(path, 'schemas.js'));
 }
 
 function createMd(className, tagName, path, saveFile) {

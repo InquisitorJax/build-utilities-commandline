@@ -1,0 +1,9 @@
+<template>
+    <pragma-options-toolbar dropdown-items.bind="toolbarItems" selected-id.two-way="detailToolbarSelectedId">
+        <div slot="items" class="default-padding-left">
+            <button>Action</button>
+        </div>
+    </pragma-options-toolbar>
+
+    <pragma-form schema.bind="schema" model.two-way="model"></pragma-form>
+</template>
