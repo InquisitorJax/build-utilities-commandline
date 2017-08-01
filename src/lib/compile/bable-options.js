@@ -5,6 +5,7 @@ module.exports = function(modules) {
         compact: false,
         code: true,
         presets: [
+            'es2017',
             ['es2015', { loose: true, modules: modules }]
         ],
         plugins: [
