@@ -4,6 +4,7 @@ const babelOptions = require("./bable-options");
 const fs = require("fs");
 const files = require("./../files");
 const path = require("path");
+const bundle = require("aurelia-bundler").bundle;
 
 function compileSource(module) {
     const targetModule = module || "amd";
@@ -12,6 +13,7 @@ function compileSource(module) {
         files.copyFiles("src/**/*.html", "app", true);
         files.copyFiles("src/**/*.css", "app", true);
         files.copyFiles("src/**/*.svg", "app", true);
+        bundelVendors();
     });
 }
 
@@ -48,6 +50,25 @@ function transpileFile(file, module, target) {
     const fileToTranspile = path.resolve(".", file);
     const code = babel.transformFileSync(fileToTranspile, babelOptions(module)).code;
     files.saveFile(target, code, true);
+}
+
+function bundelVendors() {
+    const filename = `${projectPath}/bundle.json`;
+
+    console.log(`Looking for bundle at: ${filename}`);
+
+    if (fs.existsSync(filename))
+    {
+        console.log("Bundel found, bundeling vendors");
+
+        const text = fs.readFileSync(filename, 'utf8');
+        const config = JSON.parse(text);
+
+        return bundle(config);
+    }
+    else {
+        console.log("Bundel not found");
+    }
 }
 
 module.exports = {
