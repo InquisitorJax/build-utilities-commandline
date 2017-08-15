@@ -6,7 +6,7 @@
   "scripts": {
     "test": "nyc mocha --compilers js:babel-core/register --recursive",
     "build": "bucli -c all",
-    "run": "bucli -c all && http-server",
+    "run": "bucli -c all && http-server -c-1 -o",
     "build-publish": "bucli -p"
   },
   "keywords": [],
