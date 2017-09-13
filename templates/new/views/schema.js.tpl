@@ -1,20 +1,6 @@
 export const template =
 {
     "type": "view",
-    "fields": [
-        {
-            "field": "id",
-            "map": "id"
-        },
-        {
-            "field": "code",
-            "map": "code"
-        },
-        {
-            "field": "description",
-            "map": "description"
-        }
-    ],
     "body": {
         "elements": [
             {
@@ -24,17 +10,17 @@ export const template =
                 {
                     "element": "input",
                     "title": "Id",
-                    "field": "id"
+                    "field": "model.id"
                 },
                 {
                     "element": "input",
                     "title": "Code",
-                    "field": "code"
+                    "field": "model.code"
                 },
                 {
                     "element": "input",
                     "title": "Description",
-                    "field": "description"
+                    "field": "model.description"
                 }
             ]
             }
