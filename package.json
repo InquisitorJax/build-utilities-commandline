@@ -1,6 +1,6 @@
 {
     "name": "build-utilities-commandline",
-    "version": "1.0.87",
+    "version": "1.0.88",
     "main": "commonjs/index.js",
     "scripts": {
         "build": "node ./index.js -c all",
@@ -30,9 +30,11 @@
         "aurelia-framework": "^1.1.2",
         "aurelia-pal-nodejs": "^1.0.0-beta.1.0.0",
         "aurelia-polyfills": "^1.2.1",
+        "babel-minify": "^0.2.0",
         "babel-plugin-istanbul": "^4.1.3",
         "babel-plugin-transform-class-properties": "^6.24.1",
         "babel-plugin-transform-decorators-legacy": "^1.3.4",
+        "babel-preset-env": "^1.6.0",
         "chai": "^3.5.0",
         "istanbul": "^0.4.5",
         "mocha": "^3.4.2",
@@ -58,15 +60,6 @@
         ],
         "cache": true,
         "all": true
-    },
-    "babel": {
-        "presets": [
-            "es2015"
-        ],
-        "plugins": [
-            "transform-decorators-legacy",
-            "transform-class-properties"
-        ]
     },
     "bin": {
         "bucli": "commonjs/index.js"

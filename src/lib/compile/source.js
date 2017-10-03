@@ -41,14 +41,14 @@ function transpileFiles(query, modules, targetFolder) {
     return files.getFiles(query).then(files => {
         for(let file of files) {
             const target = `${targetFolder}/${file}`;
-            transpileFile(file, modules, target);
+            transpileFile(file, target);
         }
     });
 }
 
-function transpileFile(file, module, target) {
+function transpileFile(file, target, options) {
     const fileToTranspile = path.resolve(".", file);
-    const code = babel.transformFileSync(fileToTranspile, babelOptions(module)).code;
+    const code = babel.transformFileSync(fileToTranspile, options).code;
     files.saveFile(target, code, true);
 }
 
