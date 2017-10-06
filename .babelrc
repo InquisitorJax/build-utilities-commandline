@@ -4,7 +4,6 @@
       "targets": {
         "chrome": 61
       },
-      "modules": false,
       "loose": true
     }]
   ]

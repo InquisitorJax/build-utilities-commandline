@@ -55,7 +55,7 @@ function transpileFile(file, target, module) {
 
     let code;
     if (module == null) {
-        code = babel.transformFileSync(fileToTranspile, options).code;
+        code = babel.transformFileSync(fileToTranspile).code;
     }
     else {
         code = babel.transformFileSync(fileToTranspile, babelOptions(module)).code;
