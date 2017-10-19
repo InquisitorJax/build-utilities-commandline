@@ -5,5 +5,5 @@
         </div>
     </pragma-options-toolbar>
 
-    <pragma-form schema.bind="schema" model.two-way="model"></pragma-form>
+    <pragma-form schema.bind="schema" model.two-way="model" context.bind="context"></pragma-form>
 </template>

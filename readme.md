@@ -48,3 +48,7 @@ We use chrome as the default configuration meaning that you will need to have th
 
 You can download the driver at:  
 https://chromedriver.storage.googleapis.com/index.html?path=2.30/
+
+# Package configuration is handeled by the package.json bable configuration
+https://babeljs.io/docs/plugins/preset-env/
+

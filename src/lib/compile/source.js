@@ -6,10 +6,9 @@ const files = require("./../files");
 const path = require("path");
 const bundle = require("aurelia-bundler").bundle;
 
-function compileSource(module) {
-    const targetModule = module || "amd";
+function compileSource() {
     return files.deleteFolder("app").then(_ => {
-        transpileFiles("src/**/*.js", targetModule, "app").catch(errors => console.error(errors));
+        transpileFiles("src/**/*.js", "app", null).catch(errors => console.error(errors));
         files.copyFiles("src/**/*.html", "app", true);
         files.copyFiles("src/**/*.css", "app", true);
         files.copyFiles("src/**/*.svg", "app", true);
@@ -20,35 +19,48 @@ function compileSource(module) {
 function compileDist() {
     const promises = [];
     return files.deleteFolder("dist").then(_ => {
-        promises.push(transpileFiles("src/**/*.js", "amd", "dist/amd"));
+        promises.push(transpileFiles("src/**/*.js", "dist/amd", "amd"));
         files.copyFiles("src/**/*.html", "dist/amd", true);
         files.copyFiles("src/**/*.css", "dist/amd", true);
         files.copyFiles("src/**/*.svg", "dist/amd", true);
 
-        promises.push(transpileFiles("src/**/*.js", "commonjs", "dist/commonjs"));
+        promises.push(transpileFiles("src/**/*.js", "dist/commonjs", "commonjs"));
         files.copyFiles("src/**/*.html", "dist/commonjs", true);
         files.copyFiles("src/**/*.css", "dist/commonjs", true);
         files.copyFiles("src/**/*.svg", "dist/commonjs", true);
 
-        promises.push(transpileFiles("src/**/*.js", "systemjs", "dist/systemjs"));
+        promises.push(transpileFiles("src/**/*.js", "dist/systemjs", "systemjs"));
         files.copyFiles("src/**/*.html", "dist/systemjs", true);
         files.copyFiles("src/**/*.css", "dist/systemjs", true);
         files.copyFiles("src/**/*.svg", "dist/systemjs", true);
+
+        promises.push(transpileFiles("src/**/*.js", "dist/umd", "umd"));
+        files.copyFiles("src/**/*.html", "dist/umd", true);
+        files.copyFiles("src/**/*.css", "dist/umd", true);
+        files.copyFiles("src/**/*.svg", "dist/umd", true);
     }).then(_ => Promise.all(promises).catch(errors => console.log(errors)))
 }
 
-function transpileFiles(query, modules, targetFolder) {
+function transpileFiles(query, targetFolder, modules) {
     return files.getFiles(query).then(files => {
         for(let file of files) {
             const target = `${targetFolder}/${file}`;
-            transpileFile(file, modules, target);
+            transpileFile(file, target, modules);
         }
     });
 }
 
-function transpileFile(file, module, target) {
+function transpileFile(file, target, module) {
     const fileToTranspile = path.resolve(".", file);
-    const code = babel.transformFileSync(fileToTranspile, babelOptions(module)).code;
+
+    let code;
+    if (module == null) {
+        code = babel.transformFileSync(fileToTranspile).code;
+    }
+    else {
+        code = babel.transformFileSync(fileToTranspile, babelOptions(module)).code;
+    }
+
     files.saveFile(target, code, true);
 }
 

@@ -9,10 +9,12 @@ export class __classname__ {
     @bindable toolbarItems;
     @bindable detailToolbarSelectedId;
     @bindable schema;
+    @bindable context;
     @bindable model;
 
     constructor(eventAggregator) {
         this.eventAggregator = eventAggregator;
+        this.context = this;
         this.schema = template;
     }
 
